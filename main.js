@@ -1,6 +1,17 @@
-import './style.css'
+const $ = (element) => document.querySelector(element);
 
-document.querySelector('#app').innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
+$("input").addEventListener("change", (event) => {
+  const archivos = Object.values(event.target.files);
+
+  archivos.forEach((item) => {
+    console.table(item.name, item.name.split(".").pop());
+  });
+
+  archivos.forEach((file) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      // console.log(event);
+    };
+    reader.readAsText(file);
+  });
+});
